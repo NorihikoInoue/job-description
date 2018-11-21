@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>キャリアシート</title>
+
+
+    <link href="./less/site.css" rel="stylesheet">
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="./bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="./dist/css/sb-admin-2.css" rel="stylesheet">
+
+    
+    <!-- Custom Fonts -->
+    <link href="./bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+
+</head>
+
+<body>
+
+    <div class="container" id="app">
+        <p>
+            <h3>キャリアシート</h3>
+        </p>
+
+        <div id="list">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <h3 class="panel-title">職務経歴一覧</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <div class="col-lg-2 col-xs-2">
+                            <input type="text" class="form-control" v-model="searchFor_period_start" placeholder="期間で検索">
+                        </div>
+                        <div class="col-lg-2 col-xs-2">
+                            <input type="text" class="form-control" v-model="searchFor_area" placeholder="業種・業界で検索">
+                        </div>
+                        <div class="col-lg-2 col-xs-2">
+                            <input type="text" class="form-control" v-model="searchFor_description" placeholder="業務内容で検索">
+                        </div>
+                        <div class="col-lg-2 col-xs-2">
+                            <input type="text" class="form-control" v-model="searchFor_language" placeholder="開発環境・言語で検索">
+                        </div>
+                        <div class="col-lg-2 col-xs-2">
+                            <input type="text" class="form-control" v-model="searchFor_output" placeholder="アウトプットで検索">
+                        </div>
+                        <div class="col-lg-2 col-xs-2">
+                            <input type="text" class="form-control" v-model="searchFor_role" placeholder="役割・プロジェクト規模で検索">
+                        </div>
+                    </p>
+                    <br/><br/>
+                    <div class="tab-content">
+                        <div>
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="form_list2">
+                                    <thead>
+                                        <tr>
+                                            <th v-for="(value, key) in columns" @click="sortBy(value)" :class="{ active: sortKey == value }">
+                                                {{ key}}
+                                                <span class="arrow" :class="sortOrders[value] > 0 ? 'asc' : 'dsc'"></span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in filteredList">
+                                            <td v-for="(value, key) in columns">
+                                                {{item[value]}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                        <!-- 登録 -->
+                        <button type="button" class="btn btn-success" v-on:click="get_csv_all()">CSVファイルとしてダウンロード（全データ）</button>
+                        <button type="button" class="btn btn-success" v-on:click="get_csv_condition()">CSVファイルとしてダウンロード（抽出データのみ）</button>
+                        <!-- 削除 -->
+                        <!--
+                        <button type="button" class="btn btn-danger">削除</button>
+                        -->
+                </div>
+            </div>
+        </div>
+
+        <p>
+            <h3>このサイトについて</h3>
+        </p>
+        下図のようなシステム構造で作られれています。
+        <img src="./images/archi_and_role.png" class="img-responsive"/>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Page JavaScript -->
+    <script src="./js/page.js"></script>
+    
+    <!-- Vue JavaScript -->
+    <script src="./js/vue.js"></script>
+    
+    <!-- Vue Table JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/vue.table/1.5.3/vue-table.min.js"></script>
+    
+
+    <!-- DataTables JavaScript -->
+    <script src="./bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="./bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+   
+    
+    <!-- Axio --> 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+     
+      
+    <!-- Main -->
+    <script src="./js/app.js"></script>  
+</body>
+
+</html>
