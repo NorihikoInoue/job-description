@@ -9,7 +9,14 @@
 - 表示中のリストデータ、全データをCSV形式の外部ファイルにエクスポートできます。
 
 ## Components
+
+```bash
 /server
 　AzureFunctionsで実行されるプログラムです。
 /db
 　AzureSQLDatabase上のテーブル定義（DDL）です。
+```
+
+## License
+
+[MIT License](http://opensource.org/licenses/MIT)
